@@ -1,8 +1,10 @@
+import Board from "@/components/Board";
+
 
 export default function Home() {
   return (
     <div>
-      test
+      <Board />
     </div>
   );
 }
