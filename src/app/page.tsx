@@ -1,6 +1,8 @@
-import Board from "@/components/Board";
+import Boards from "@/components/Boards";
 import LoginView from "@/components/views/LoginView";
 import { authOptions } from "@/lib/authOptions";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 
