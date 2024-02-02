@@ -6,35 +6,40 @@ type ColumnProps = {
   id: string;
   name: string;
   cards: CardType[];
-  setCards: SetStateAction<CardType[]>;
+  setCards: SetStateAction<any>;
 };
 
 export const Column = ({ id, name, cards, setCards }: ColumnProps) => {
 
   function setCardsForColumn(sortedCards: CardType[], newColumnId: string) {
-    const sortedCardsIds = sortedCards.map(c => c.id);
-    setCards(prevCards => {
-      const newCards = [...prevCards],
-      newCards.forEach(newCard => {
-        if (sortedCardsIds.includes(newCard.id)) {
-          newCard.columnId = newColumnId;
-        }
+
+    setCards((prevCards: CardType[]) => {
+      const newCards = [...prevCards];
+      sortedCards.forEach((sortedCard:CardType, newIndex:number) => {
+          const foundCard = newCards.find(newCard => newCard.id === sortedCard.id);
+          if (foundCard) {
+            foundCard.index = newIndex;
+            foundCard.columnId = newColumnId;
+          }
       })
+      return newCards;
     });
-    return newCards;
   }
+
   return (
     <div className="w-48 bg-white shadow-sm rounded-md p-2">
       <h3>{name}</h3>
       <ReactSortable
         list={cards}
-        setList={(cards) => setCardsForColumn(cards, id)}
+        setList={items => setCardsForColumn(items, id)}
         group="cards"
+        className="min-h-12"
+        ghostClass="opacity-40"
       >
         {cards.map((card) => (
           <div
-            className="border my-2 p-4 rounded-md"
-            key={card.order.toString()}
+            className="border bg-white my-2 p-4 rounded-md"
+            key={card.id}
           >
             <span>{card.name}</span>
           </div>

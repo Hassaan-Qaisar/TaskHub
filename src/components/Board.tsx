@@ -12,15 +12,15 @@ const defaultColumns = [
 export type CardType = {
   name: string;
   id: string | number;
-  order: number;
+  index: number;
   columnId: string;
 };
 
 const defaultCards = [
-  { id: "asdf", name: "task 1", order: 0, columnId: "col1" },
-  { id: "asdf", name: "task 5", order: 0, columnId: "col1" },
-  { id: "asasd", name: "task 2", order: 1, columnId: "col2" },
-  { id: "ahgdh", name: "task 3", order: 2, columnId: "col3" },
+  { id: "asdf", name: "task 1", index: 0, columnId: "col1" },
+  { id: "asdo", name: "task 5", index: 1, columnId: "col1" },
+  { id: "asasd", name: "task 2", index: 1, columnId: "col2" },
+  { id: "ahgdh", name: "task 3", index: 2, columnId: "col3" },
 ];
 
 const Board = () => {
@@ -33,8 +33,10 @@ const Board = () => {
         <Column
           {...column}
           setCards={setCards}
-          key={column.index}
-          cards={cards.filter((c) => c.columnId === column.id)}
+          key={column.id}
+          cards={cards
+            .sort((a, b) => a.index - b.index)
+            .filter((c) => c.columnId === column.id)}
         />
       ))}
       <NewColumnForm />
