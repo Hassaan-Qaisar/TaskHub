@@ -19,7 +19,7 @@ export const Columns = () => {
     },
     []
   );
-
+    
   function setColumnsOrder(sortedColumns: Column[]) {
     const newColumns: LiveObject<Column>[] = [];
     sortedColumns.forEach((sortedColumn, newIndex) => {
