@@ -6,6 +6,7 @@ import { shallow } from "@liveblocks/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis, faTrash } from "@fortawesome/free-solid-svg-icons";
 import CancelButton from "./CancelButton";
+import {default as ColumnCard} from './Card'
 
 type ColumnProps = {
   id: string;
@@ -107,9 +108,9 @@ export default function Column({ id, name }: ColumnProps) {
             className="min-h-12"
             ghostClass="opacity-40"
           >
-            {/* {columnCards.map(card => (
+            {columnCards.map(card => (
               <ColumnCard key={card.id} id={card.id} name={card.name} />
-            ))} */}
+            ))}
           </ReactSortable>
         </>
       )}
