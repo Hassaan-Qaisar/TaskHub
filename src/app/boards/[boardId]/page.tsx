@@ -14,9 +14,9 @@ export default async function BoardPage(props: PageProps) {
   const boardId = props.params.boardId;
   const userEmail = await getUserEmail();
   const boardInfo = await liveblocksClient.getRoom(boardId);
-  if (!boardInfo) {
-    <div>Board doesnot exist</div>
-  }
+  // if (!boardInfo) {
+  //   <div>Board doesnot exist</div>
+  // }
   const userAccess = boardInfo.usersAccesses?.[userEmail];
   const hasAccess = userAccess && [...userAccess].includes("room:write");
   if (!hasAccess) {
