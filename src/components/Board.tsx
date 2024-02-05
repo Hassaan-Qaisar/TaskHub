@@ -1,6 +1,10 @@
 "use client";
 import React, { FormEvent, useEffect, useState } from "react";
-import { RoomProvider, useUpdateMyPresence } from "@/app/liveblocks.config";
+import {
+  RoomProvider,
+  useUpdateMyPresence,
+  useMyPresence,
+} from "@/app/liveblocks.config";
 import { LiveList } from "@liveblocks/core";
 import { ClientSideSuspense } from "@liveblocks/react";
 import { Columns } from "./Columns";
@@ -9,19 +13,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import { updateBoard } from "@/app/actions/boardActions";
+import { BoardContextProvider } from "@/components/BoardContext";
 
 const Board = ({ id, name }: { id: string; name: string }) => {
   const [renameMode, setRenameMode] = useState(false);
   const router = useRouter();
-  // const updateMyPresence = useUpdateMyPresence();
+  const updateMyPresence = useUpdateMyPresence();
 
-  // useEffect(() => {
-  //   updateMyPresence({ boardId: id });
+  useEffect(() => {
+    updateMyPresence({ boardId: id });
 
-  //   return () => {
-  //     updateMyPresence({ boardId: null });
-  //   };
-  // }, []);
+    return () => {
+      updateMyPresence({ boardId: null });
+    };
+  }, []);
 
   async function handleNameSubmit(ev: FormEvent) {
     ev.preventDefault();
@@ -36,46 +41,51 @@ const Board = ({ id, name }: { id: string; name: string }) => {
   }
 
   return (
-    <RoomProvider
-      id={id}
-      initialPresence={{
-        cardId: null,
-        boardId: null,
-      }}
-      initialStorage={{
-        columns: new LiveList(),
-        cards: new LiveList(),
-      }}
-    >
-      <ClientSideSuspense fallback={<div>loading...</div>}>
-        {() => (
-          <>
-            <div className="flex gap-2 justify-between items-center mb-4">
-              <div>
-                {!renameMode && (
-                  <h1 className="text-2xl" onClick={() => setRenameMode(true)}>
-                    Board: {name}
-                  </h1>
-                )}
-                {renameMode && (
-                  <form onSubmit={handleNameSubmit}>
-                    <input type="text" defaultValue={name} />
-                  </form>
-                )}
+    <BoardContextProvider>
+      <RoomProvider
+        id={id}
+        initialPresence={{
+          cardId: null,
+          boardId: null,
+        }}
+        initialStorage={{
+          columns: new LiveList(),
+          cards: new LiveList(),
+        }}
+      >
+        <ClientSideSuspense fallback={<div>loading...</div>}>
+          {() => (
+            <>
+              <div className="flex gap-2 justify-between items-center mb-4">
+                <div>
+                  {!renameMode && (
+                    <h1
+                      className="text-2xl"
+                      onClick={() => setRenameMode(true)}
+                    >
+                      Board: {name}
+                    </h1>
+                  )}
+                  {renameMode && (
+                    <form onSubmit={handleNameSubmit}>
+                      <input type="text" defaultValue={name} />
+                    </form>
+                  )}
+                </div>
+                <Link
+                  className="flex gap-2 items-center btn"
+                  href={`/boards/${id}/settings`}
+                >
+                  <FontAwesomeIcon icon={faCog} />
+                  Board settings
+                </Link>
               </div>
-              <Link
-                className="flex gap-2 items-center btn"
-                href={`/boards/${id}/settings`}
-              >
-                <FontAwesomeIcon icon={faCog} />
-                Board settings
-              </Link>
-            </div>
-            <Columns />
-          </>
-        )}
-      </ClientSideSuspense>
-    </RoomProvider>
+              <Columns />
+            </>
+          )}
+        </ClientSideSuspense>
+      </RoomProvider>
+    </BoardContextProvider>
   );
 };
 

@@ -6,7 +6,6 @@ import "@liveblocks/react-comments/styles.css";
 import {useEffect} from "react";
 
 export default function CardModal() {
-
   const router = useRouter();
   const params = useParams();
   const updateMyPresence = useUpdateMyPresence();
