@@ -29,7 +29,7 @@ export default function CardModal() {
       >
         <div className="">
           <div className="bg-white max-w-sm my-8 px-4 p-1 mx-auto rounded-md">
-            <div onClick={(ev) => ev.stopPropagation()}>
+            <div onClick={ev => ev.stopPropagation()}>
               <CardModalBody />
             </div>
           </div>

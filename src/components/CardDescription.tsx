@@ -6,10 +6,10 @@ import { useEffect, useState } from "react";
 import { Doc } from "yjs";
 
 export default function CardDescription() {
-  const { cardId } = useParams();
+  const {cardId} = useParams();
   const room = useRoom();
 
-  const [doc, setDoc] = useState<Doc | null>(null);
+  const [doc, setDoc] = useState<Doc|null>(null);
   const [provider, setProvider] = useState<LiveblocksProvider<
     any,
     any,

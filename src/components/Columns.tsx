@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { NewColumnForm } from "./forms/NewColumnForm";
+import NewColumnForm from "@/components/forms/NewColumnForm";
 import { Column, useMutation, useStorage } from "@/app/liveblocks.config";
 import { ReactSortable } from "react-sortablejs";
 import { LiveList, LiveObject, shallow } from "@liveblocks/core";

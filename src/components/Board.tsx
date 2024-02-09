@@ -1,10 +1,12 @@
 "use client";
+import { updateBoard } from "@/app/actions/boardActions";
 import React, { FormEvent, useEffect, useState } from "react";
 import {
   RoomProvider,
   useUpdateMyPresence,
   useMyPresence,
 } from "@/app/liveblocks.config";
+import { BoardContextProvider } from "@/components/BoardContext";
 import { LiveList } from "@liveblocks/core";
 import { ClientSideSuspense } from "@liveblocks/react";
 import { Columns } from "./Columns";
@@ -12,10 +14,8 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
-import { updateBoard } from "@/app/actions/boardActions";
-import { BoardContextProvider } from "@/components/BoardContext";
 
-const Board = ({ id, name }: { id: string; name: string }) => {
+export default function Board({ id, name }: { id: string; name: string }) {
   const [renameMode, setRenameMode] = useState(false);
   const router = useRouter();
   const updateMyPresence = useUpdateMyPresence();
@@ -33,8 +33,8 @@ const Board = ({ id, name }: { id: string; name: string }) => {
     const input = (ev.target as HTMLFormElement).querySelector("input");
     if (input) {
       const newName = input.value;
-      await updateBoard(id, { metadata: { boardName: newName } });
-      input.value = "";
+      await updateBoard(id, {metadata: {boardName: newName}});
+      input.value = '';
       setRenameMode(false);
       router.refresh();
     }
@@ -53,7 +53,7 @@ const Board = ({ id, name }: { id: string; name: string }) => {
           cards: new LiveList(),
         }}
       >
-        <ClientSideSuspense fallback={<div>loading...</div>}>
+        <ClientSideSuspense fallback={(<div>loading...</div>)}>
           {() => (
             <>
               <div className="flex gap-2 justify-between items-center mb-4">
@@ -87,6 +87,4 @@ const Board = ({ id, name }: { id: string; name: string }) => {
       </RoomProvider>
     </BoardContextProvider>
   );
-};
-
-export default Board;
+}

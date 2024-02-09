@@ -12,10 +12,9 @@ import { faComments, faFileLines } from "@fortawesome/free-regular-svg-icons";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { shallow } from "@liveblocks/core";
-// import {Composer, Thread} from "@liveblocks/react-comments";
+import { Composer, Thread } from "@liveblocks/react-comments";
 import { useParams, useRouter } from "next/navigation";
 import { FormEvent, useContext, useEffect, useState } from "react";
-import { Composer, Thread } from "@liveblocks/react-comments";
 
 export default function CardModalBody() {
   const router = useRouter();
@@ -31,12 +30,12 @@ export default function CardModalBody() {
   const [editMode, setEditMode] = useState(false);
 
   const card = useStorage((root) => {
-    return root.cards.find((c) => c.id === params.cardId);
+    return root.cards.find(c => c.id === params.cardId);
   }, shallow);
 
   const updateCard = useMutation(({ storage }, cardId, updateData) => {
-    const cards = storage.get("cards").map((c) => c.toObject());
-    const index = cards.findIndex((c) => c.id === cardId);
+    const cards = storage.get("cards").map(c => c.toObject());
+    const index = cards.findIndex(c => c.id === cardId);
     const card = storage.get("cards").get(index);
     for (let updateKey in updateData) {
       card?.set(updateKey as keyof Card, updateData[updateKey]);
@@ -45,7 +44,7 @@ export default function CardModalBody() {
 
   const deleteCard = useMutation(({ storage }, id) => {
     const cards = storage.get("cards");
-    const cardIndex = cards.findIndex((c) => c.toObject().id === id);
+    const cardIndex = cards.findIndex(c => c.toObject().id === id);
     cards.delete(cardIndex);
   }, []);
 
@@ -110,14 +109,14 @@ export default function CardModalBody() {
           </h2>
           <div className="-mx-4">
             {threads &&
-              threads.map((thread) => (
+              threads.map(thread => (
                 <div key={thread.id}>
                   <Thread thread={thread} id={thread.id} />
                 </div>
               ))}
             {threads?.length === 0 && (
               <div>
-                <Composer metadata={{ cardId: params.cardId.toString() }} />
+                <Composer metadata={{ cardId: params.cardId.toString()}} />
               </div>
             )}
           </div>
