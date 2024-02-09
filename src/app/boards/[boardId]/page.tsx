@@ -14,17 +14,22 @@ export default async function BoardPage(props: PageProps) {
   const boardId = props.params.boardId;
   const userEmail = await getUserEmail();
   const boardInfo = await liveblocksClient.getRoom(boardId);
-  // if (!boardInfo) {
-  //   <div>Board doesnot exist</div>
-  // }
   const userAccess = boardInfo.usersAccesses?.[userEmail];
   const hasAccess = userAccess && [...userAccess].includes("room:write");
+  if (!boardId) {
+    return(
+      <div>Board do not exist</div>
+    )
+  }
+  
   if (!hasAccess) {
     return <div>Access denied</div>;
   }
   return (
     <div>
-      <Board name={boardInfo.metadata.boardName.toString()} id={boardId} />
+      <Board
+        name={boardInfo.metadata.boardName.toString()}
+        id={boardId} />
     </div>
   );
 }

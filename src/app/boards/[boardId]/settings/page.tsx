@@ -35,12 +35,6 @@ export default async function BoardSettings({ params }: PageProps) {
         <BoardDeleteButton boardId={boardId} />
       </div>
 
-      {/* {Object.keys(boardInfo.usersAccesses).map(email => (
-        <div>
-            <h2>{email}</h2>
-        </div>
-      ))} */}
-
       <h1 className="text-2xl">
         Access to board {boardInfo.metadata.boardName}:
       </h1>
