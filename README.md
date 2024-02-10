@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# TaskHub
 
-## Getting Started
+TaskHub is a task and project management application built with Next.js. It allows users to create boards, lists, and cards to organize their tasks and projects effectively. TaskHub also features Google authentication for seamless user login.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Board Management**: Create and manage multiple boards for different projects.
+- **List Organization**: Organize tasks within boards using customizable lists.
+- **Card Management**: Add, edit, and delete cards to represent individual tasks.
+- **Google Authentication**: Securely log in to TaskHub using your Google account.
+- **Responsive Design**: TaskHub is designed to work seamlessly across devices of all sizes.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To run TaskHub locally, follow these steps:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. Clone the repository:
 
-## Learn More
+   ```bash
+   git clone <https://github.com/Hassaan-Qaisar/TaskHub>
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. Navigate to the project directory:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   cd taskhub
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+3. Install dependencies:
 
-## Deploy on Vercel
+   ```bash
+   yarn install
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Start the development server:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   ```bash
+   yarn dev
+   ```
+
+5. Open TaskHub in your web browser:
+
+   ```url
+   http://localhost:3000
+   ```
+
+## Technologies Used
+
+- **Next.js**: React framework for building server-side rendered applications.
+- **MongoDB**: Database for storing application data.
+- **LiveBlock**: Storage solution for boards, cards, and other data.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+
+## Contributing
+
+Contributions to TaskHub are welcome! To contribute, follow these steps:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/improvement`).
+3. Make your changes.
+4. Commit your changes (`git commit -am 'Add new feature'`).
+5. Push to the branch (`git push origin feature/improvement`).
+6. Create a new Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+Feel free to customize this README template to fit the specifics of your TaskHub project and its features. Good luck with your project!
